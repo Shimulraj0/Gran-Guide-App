@@ -34,40 +34,46 @@ class SupportView extends GetView<SupportController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Need Help Right Now Banner
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-              decoration: BoxDecoration(
-                color: const Color(0xFFF2F8FF), // Light blue tint
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: const Color(0xFFE0E0E0)),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.09),
-                    blurRadius: 10,
-                    offset: const Offset(0, 6),
-                  ),
-                ],
-              ),
-              child: Column(
-                children: [
-                  const Icon(
-                    Icons.help_outlined,
-                    color: Color(0xFF2F80ED),
-                    size: 32,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    "Need Help Right Now?",
-                    style: GoogleFonts.outfit(
-                      color: const Color(0xFF2F80ED),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      decoration: TextDecoration.underline,
-                      decorationColor: const Color(0xFF2F80ED),
+            GestureDetector(
+              onTap: controller.onNeedHelp,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(
+                  vertical: 20,
+                  horizontal: 16,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xFFF2F8FF), // Light blue tint
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: const Color(0xFFE0E0E0)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.09),
+                      blurRadius: 10,
+                      offset: const Offset(0, 6),
                     ),
-                  ),
-                ],
+                  ],
+                ),
+                child: Column(
+                  children: [
+                    const Icon(
+                      Icons.help_outlined,
+                      color: Color(0xFF2F80ED),
+                      size: 32,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      "Need Help Right Now?",
+                      style: GoogleFonts.outfit(
+                        color: const Color(0xFF2F80ED),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        decoration: TextDecoration.underline,
+                        decorationColor: const Color(0xFF2F80ED),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 24),

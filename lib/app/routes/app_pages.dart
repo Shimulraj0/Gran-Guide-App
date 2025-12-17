@@ -1,4 +1,4 @@
-import 'package:get/get_navigation/src/routes/get_route.dart';
+import 'package:get/get.dart';
 
 import 'package:gran_guide_app/app/modules/verify_code/verify_code.dart';
 
@@ -26,6 +26,11 @@ import '../modules/support/support_binding.dart';
 import '../modules/support/support_view.dart';
 import '../modules/profile/profile_binding.dart';
 import '../modules/profile/profile_view.dart';
+import '../modules/chat/chat_binding.dart';
+import '../modules/chat/views/chat_list_view.dart';
+import '../modules/chat/views/chat_detail_view.dart';
+import '../modules/call/call_binding.dart';
+import '../modules/call/views/incoming_call_view.dart';
 
 part 'app_routes.dart';
 
@@ -103,6 +108,26 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT,
+      page: () => const ChatListView(),
+      binding: ChatBinding(),
+      transition: Transition.native,
+    ),
+    GetPage(
+      name: _Paths.CONTACT_PROFILE,
+      page: () => const ChatDetailView(),
+      binding: ChatBinding(),
+      transition: Transition.rightToLeft,
+      transitionDuration: const Duration(milliseconds: 300),
+    ),
+    GetPage(
+      name: _Paths.INCOMING_CALL,
+      page: () => const IncomingCallView(),
+      binding: CallBinding(),
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 500),
     ),
   ];
 
