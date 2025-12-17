@@ -49,7 +49,7 @@ class ProtectionView extends GetView<ProtectionController> {
                   () => Switch(
                     value: controller.isProtectionEnabled.value,
                     onChanged: controller.toggleProtection,
-                    activeThumbColor: Colors.white,
+                    activeThumbColor: const Color.fromARGB(255, 75, 150, 93),
                     activeTrackColor: const Color(0xFF1fa4e4),
                   ),
                 ),
@@ -203,7 +203,7 @@ class ProtectionView extends GetView<ProtectionController> {
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey,
+                    color: Color.fromARGB(255, 31, 30, 30),
                   ),
                 ),
               ],
@@ -227,7 +227,7 @@ class ProtectionView extends GetView<ProtectionController> {
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey,
+                    color: Color.fromARGB(255, 17, 16, 16),
                   ),
                 ),
               ],
@@ -251,7 +251,7 @@ class ProtectionView extends GetView<ProtectionController> {
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Colors.grey,
+                    color: Color.fromARGB(255, 20, 20, 20),
                   ),
                 ),
               ],

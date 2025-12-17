@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../chat_controller.dart';
+import '../../../widgets/custom_bottom_nav_bar.dart';
 
 class ChatDetailView extends GetView<ChatController> {
   const ChatDetailView({super.key});
@@ -19,204 +20,198 @@ class ChatDetailView extends GetView<ChatController> {
 
     return Scaffold(
       backgroundColor: const Color(0xFF2196F3), // Match header blue
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Custom Header
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                        onPressed: () => Get.back(),
+      body: Column(
+        children: [
+          // Custom Header
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.white,
+                        size: 20,
                       ),
-                      const SizedBox(width: 48), // Spacer
-                    ],
-                  ),
-                  const SizedBox(height: 5),
-                  CircleAvatar(
-                    radius: 45,
-                    backgroundImage: AssetImage(chatData['image'] ?? ""),
-                    backgroundColor: Colors.white24,
-                    child: (chatData['image'] == null)
-                        ? const Icon(
-                            Icons.person,
-                            size: 50,
-                            color: Colors.white,
-                          )
-                        : null,
-                  ),
-                  const SizedBox(height: 15),
-                  Text(
-                    chatData['name'] ?? "Jhon Abraham",
-                    style: GoogleFonts.outfit(
-                      color: Colors.white,
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+                      onPressed: () => Get.back(),
                     ),
-                  ),
-                  Text(
-                    chatData['handle'] ?? "@jhonabraham",
-                    style: GoogleFonts.outfit(
-                      color: Colors.white70,
-                      fontSize: 14,
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _buildHeaderAction(
-                        Icons.messenger_rounded,
-                        isPrimary: true,
-                        onTap: () {},
-                      ),
-                      const SizedBox(width: 20),
-                      _buildHeaderAction(
-                        Icons.call,
-                        isPrimary: false,
-                        onTap: () => Get.toNamed('/incoming_call'),
-                      ),
-                      const SizedBox(width: 20),
-                      _buildHeaderAction(
-                        Icons.share,
-                        isPrimary: false,
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(35),
-                    topRight: Radius.circular(35),
+                    const SizedBox(width: 48), // Spacer
+                  ],
+                ),
+                const SizedBox(height: 5),
+                CircleAvatar(
+                  radius: 45,
+                  backgroundImage: AssetImage(chatData['image'] ?? ""),
+                  backgroundColor: Colors.white24,
+                  child: (chatData['image'] == null)
+                      ? const Icon(Icons.person, size: 50, color: Colors.white)
+                      : null,
+                ),
+                const SizedBox(height: 15),
+                Text(
+                  chatData['name'] ?? "Jhon Abraham",
+                  style: GoogleFonts.outfit(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-                child: Column(
+                Text(
+                  chatData['handle'] ?? "@jhonabraham",
+                  style: GoogleFonts.outfit(
+                    color: Colors.white70,
+                    fontSize: 14,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 12),
-                    // Handle Bar
-                    Container(
-                      width: 40,
-                      height: 4,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(2),
-                      ),
+                    _buildHeaderAction(
+                      Icons.messenger_rounded,
+                      isPrimary: true,
+                      onTap: () {},
                     ),
-                    Expanded(
-                      child: ListView(
-                        padding: const EdgeInsets.all(20),
-                        children: [
-                          _buildMessageRow(
-                            isMe: false,
-                            name: chatData['name'] ?? "Jhon Abraham",
-                            message: "Hello ! Nazrul How are you?",
-                            time: "09:25 AM",
-                            avatar: chatData['image'],
-                          ),
-                          const SizedBox(height: 15),
-                          _buildMessageRow(
-                            isMe: true,
-                            name: "Me",
-                            message: "You did your job well!",
-                            time: "09:25 AM",
-                            avatar: null,
-                          ),
-                          const SizedBox(height: 15),
-                          _buildMessageRow(
-                            isMe: false,
-                            name: chatData['name'] ?? "Jhon Abraham",
-                            message: "Have a great working week!!",
-                            time: "09:25 AM",
-                            avatar: chatData['image'],
-                          ),
-                          const SizedBox(height: 10),
-                          _buildMessageRow(
-                            isMe: false,
-                            name: chatData['name'] ?? "Jhon Abraham",
-                            message: "Hope you like it",
-                            time: "09:25 AM",
-                            avatar: chatData['image'],
-                            hideHeader: true,
-                          ),
-                        ],
-                      ),
+                    const SizedBox(width: 20),
+                    _buildHeaderAction(
+                      Icons.call,
+                      isPrimary: false,
+                      onTap: () => Get.toNamed('/incoming_call'),
+                    ),
+                    const SizedBox(width: 20),
+                    _buildHeaderAction(
+                      Icons.share,
+                      isPrimary: false,
+                      onTap: () {},
                     ),
                   ],
                 ),
-              ),
+              ],
             ),
+          ),
 
-            // Input Area
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-              color: Colors.white,
-              child: Row(
+          Expanded(
+            child: Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(35),
+                  topRight: Radius.circular(35),
+                ),
+              ),
+              child: Column(
                 children: [
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      height: 55,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: const Color(0xFFE0E0E0)),
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: "Type something...",
-                                hintStyle: GoogleFonts.outfit(
-                                  color: Colors.grey[400],
-                                  fontSize: 14,
-                                ),
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                          Icon(Icons.image_outlined, color: Colors.grey[400]),
-                        ],
-                      ),
+                  const SizedBox(height: 12),
+                  // Handle Bar
+                  Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(2),
                     ),
                   ),
-                  const SizedBox(width: 12),
-                  Container(
-                    height: 55,
-                    width: 55,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: const Color(0xFF2196F3).withOpacity(0.3),
-                      ),
-                    ),
-                    child: const Icon(
-                      Icons.send_outlined,
-                      color: Color(0xFF2196F3),
+                  Expanded(
+                    child: ListView(
+                      padding: const EdgeInsets.all(20),
+                      children: [
+                        _buildMessageRow(
+                          isMe: false,
+                          name: chatData['name'] ?? "Jhon Abraham",
+                          message: "Hello ! Nazrul How are you?",
+                          time: "09:25 AM",
+                          avatar: chatData['image'],
+                        ),
+                        const SizedBox(height: 15),
+                        _buildMessageRow(
+                          isMe: true,
+                          name: "Me",
+                          message: "You did your job well!",
+                          time: "09:25 AM",
+                          avatar: null,
+                        ),
+                        const SizedBox(height: 15),
+                        _buildMessageRow(
+                          isMe: false,
+                          name: chatData['name'] ?? "Jhon Abraham",
+                          message: "Have a great working week!!",
+                          time: "09:25 AM",
+                          avatar: chatData['image'],
+                        ),
+                        const SizedBox(height: 10),
+                        _buildMessageRow(
+                          isMe: false,
+                          name: chatData['name'] ?? "Jhon Abraham",
+                          message: "Hope you like it",
+                          time: "09:25 AM",
+                          avatar: chatData['image'],
+                          hideHeader: true,
+                        ),
+                      ],
                     ),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+
+          // Input Area
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+            color: Colors.white,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    height: 55,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: const Color(0xFFE0E0E0)),
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            decoration: InputDecoration(
+                              hintText: "Type something...",
+                              hintStyle: GoogleFonts.outfit(
+                                color: Colors.grey[400],
+                                fontSize: 14,
+                              ),
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                        Icon(Icons.image_outlined, color: Colors.grey[400]),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Container(
+                  height: 55,
+                  width: 55,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(
+                      color: const Color(0xFF2196F3).withOpacity(0.3),
+                    ),
+                  ),
+                  child: const Icon(
+                    Icons.send_outlined,
+                    color: Color(0xFF2196F3),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../colors/app_colors.dart';
+import '../../../widgets/custom_bottom_nav_bar.dart';
 import '../scam_tip_controller.dart';
 
 class ScamTipDetailsView extends GetView<ScamTipController> {
@@ -147,7 +148,7 @@ class ScamTipDetailsView extends GetView<ScamTipController> {
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomNavBar(),
+      bottomNavigationBar: const CustomBottomNavBar(currentIndex: 1),
     );
   }
 
@@ -161,50 +162,6 @@ class ScamTipDetailsView extends GetView<ScamTipController> {
           Expanded(child: Text(text, style: const TextStyle(fontSize: 13))),
         ],
       ),
-    );
-  }
-
-  Widget _buildBottomNavBar() {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: Colors.black54,
-      unselectedItemColor: Colors.black54,
-      backgroundColor: AppColors.primaryLight,
-      items: [
-        BottomNavigationBarItem(
-          icon: Image.asset('assets/icons/home.png', width: 24, height: 24),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Image.asset('assets/icons/frame.png', width: 24, height: 24),
-          label: 'Educate',
-        ),
-        BottomNavigationBarItem(
-          icon: Image.asset(
-            'assets/icons/Vector(2).png',
-            width: 24,
-            height: 24,
-          ),
-          label: 'Protection',
-        ),
-        BottomNavigationBarItem(
-          icon: Image.asset(
-            'assets/icons/customer-support 1.png',
-            width: 24,
-            height: 24,
-          ),
-          label: 'Support',
-        ),
-        const BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Profile',
-        ),
-      ],
-      currentIndex: 1, // Maybe Educate? or just default
-      onTap: (index) {
-        // Handle navigation
-        if (index == 0) Get.offAllNamed('/home');
-      },
     );
   }
 }

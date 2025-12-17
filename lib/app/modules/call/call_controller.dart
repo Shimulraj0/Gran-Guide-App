@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'views/ongoing_call_view.dart';
+import '../../routes/app_pages.dart';
 
 class CallController extends GetxController {
   final callerName = "Annette Black".obs;
@@ -10,27 +10,51 @@ class CallController extends GetxController {
   final isMuted = false.obs;
   final isSpeakerOn = false.obs;
   final duration = Duration.zero.obs;
+  final showDialPad = false.obs;
+  final dialPadValue = "".obs;
   Timer? _timer;
 
-  // Formatted duration string
-  String get durationString {
-    String twoDigits(int n) => n.toString().padLeft(2, "0");
-    String twoDigitMinutes = twoDigits(duration.value.inMinutes.remainder(60));
-    String twoDigitSeconds = twoDigits(duration.value.inSeconds.remainder(60));
-    return "$twoDigitMinutes:$twoDigitSeconds";
+  void onAccept() {
+    startTimer();
+    // Navigate to ongoing call view using named route
+    Get.offNamed(Routes.ONGOING_CALL, arguments: {'isOngoing': true});
   }
 
-  void onAccept() {
-    // Navigate to ongoing call view (replacing current view in stack to prevent back)
-    // Or just push it.
-    Get.off(() => const OngoingCallView(), transition: Transition.fadeIn);
-    startTimer();
+  @override
+  void onReady() {
+    super.onReady();
+    // Fallback: start timer if we are on the ongoing call screen and it's not running
+    if (Get.currentRoute == Routes.ONGOING_CALL ||
+        (Get.arguments is Map && Get.arguments['isOngoing'] == true)) {
+      startTimer();
+    }
   }
 
   void startTimer() {
+    if (_timer != null && _timer!.isActive) {
+      debugPrint("Timer already active, not starting again.");
+      return;
+    }
+    debugPrint("Timer starting now...");
+    duration.value = Duration.zero;
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       duration.value += const Duration(seconds: 1);
+      debugPrint("Timer tick: ${duration.value.inSeconds}s");
     });
+  }
+
+  void toggleDialPad() {
+    showDialPad.value = !showDialPad.value;
+  }
+
+  void onKeyPress(String key) {
+    dialPadValue.value += key;
+    // In a real app, this might send DTMF tones
+    debugPrint("Dialed: $key");
+  }
+
+  void clearDialPad() {
+    dialPadValue.value = "";
   }
 
   void onDecline() {
@@ -39,7 +63,7 @@ class CallController extends GetxController {
 
   void onEndCall() {
     _timer?.cancel();
-    Get.back(); // Goes back to where call was triggered from (Support or Chat)
+    Get.back(); // Goes back to where call was triggered from
   }
 
   void onRemindMe() {

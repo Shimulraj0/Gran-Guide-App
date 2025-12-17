@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../colors/app_colors.dart';
+import '../../../widgets/custom_bottom_nav_bar.dart';
 
 class ProtectionDetailsView extends StatelessWidget {
   const ProtectionDetailsView({super.key});
@@ -90,6 +91,7 @@ class ProtectionDetailsView extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: const CustomBottomNavBar(currentIndex: 2),
     );
   }
 
