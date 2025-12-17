@@ -19,6 +19,7 @@ abstract class Routes {
   static const CHAT = _Paths.CHAT;
   static const CONTACT_PROFILE = _Paths.CONTACT_PROFILE;
   static const INCOMING_CALL = _Paths.INCOMING_CALL;
+  static const PROTECTION_DETAILS = _Paths.PROTECTION_DETAILS;
 }
 
 abstract class _Paths {
@@ -39,4 +40,5 @@ abstract class _Paths {
   static const CHAT = '/chat';
   static const CONTACT_PROFILE = '/chat/profile';
   static const INCOMING_CALL = '/call/incoming';
+  static const PROTECTION_DETAILS = '/protection/details';
 }

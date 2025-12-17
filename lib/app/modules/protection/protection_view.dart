@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../widgets/custom_bottom_nav_bar.dart';
+import '../../routes/app_pages.dart';
 import 'protection_controller.dart';
 
 class ProtectionView extends GetView<ProtectionController> {
@@ -24,7 +25,7 @@ class ProtectionView extends GetView<ProtectionController> {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () => Get.back(),
+          onPressed: () => Get.offNamed(Routes.HOME),
         ),
       ),
       body: SingleChildScrollView(
@@ -256,49 +257,58 @@ class ProtectionView extends GetView<ProtectionController> {
               ],
             ),
             const SizedBox(height: 16),
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey.shade300),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  RichText(
-                    text: TextSpan(
-                      style: const TextStyle(color: Colors.black, fontSize: 14),
-                      children: [
-                        const TextSpan(text: "Message "),
-                        TextSpan(
-                          text: "from: ",
-                          style: const TextStyle(color: Color(0xFF1fa4e4)),
+            GestureDetector(
+              onTap: () => Get.toNamed(
+                Routes.CONTACT_PROFILE,
+              ), // Navigates to ChatDetailView
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
                         ),
-                        const TextSpan(text: "Daughter"),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  const Text(
-                    "See you tomorrow!",
-                    style: TextStyle(color: Colors.grey, fontSize: 14),
-                  ),
-                  const Divider(height: 24),
-                  const Text(
-                    "Marked Safe",
-                    style: TextStyle(color: Colors.green, fontSize: 14),
-                  ),
-                  const SizedBox(height: 4),
-                  Center(
-                    child: Text(
-                      "[No action needed]",
-                      style: TextStyle(
-                        color: Colors.grey.shade600,
-                        fontSize: 13,
+                        children: [
+                          const TextSpan(text: "Message "),
+                          TextSpan(
+                            text: "from: ",
+                            style: const TextStyle(color: Color(0xFF1fa4e4)),
+                          ),
+                          const TextSpan(text: "Daughter"),
+                        ],
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 4),
+                    const Text(
+                      "See you tomorrow!",
+                      style: TextStyle(color: Colors.grey, fontSize: 14),
+                    ),
+                    const Divider(height: 24),
+                    const Text(
+                      "Marked Safe",
+                      style: TextStyle(color: Colors.green, fontSize: 14),
+                    ),
+                    const SizedBox(height: 4),
+                    Center(
+                      child: Text(
+                        "[Tap to open chat]",
+                        style: TextStyle(
+                          color: Color(0xFF1fa4e4),
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
 
@@ -525,91 +535,97 @@ class ProtectionView extends GetView<ProtectionController> {
     required String actionText,
     Color? borderColor,
   }) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(12),
+    return GestureDetector(
+      onTap: () => Get.toNamed(
+        Routes.PROTECTION_DETAILS,
+        parameters: {'title': title, 'reason': reason, 'riskScore': riskScore},
       ),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: [
-                // Parse title to color 'Call' text
-                RichText(
-                  text: TextSpan(
-                    style: const TextStyle(color: Colors.black, fontSize: 14),
-                    children: [
-                      const TextSpan(text: "Blocked "),
-                      TextSpan(
-                        text: "Call",
-                        style: const TextStyle(color: Colors.amber),
-                      ),
-                      TextSpan(
-                        text: title.replaceAll("Blocked Call", ""),
-                      ), // Very naive replacement for demo
-                    ],
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.shade300),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                children: [
+                  // Parse title to color 'Call' text
+                  RichText(
+                    text: TextSpan(
+                      style: const TextStyle(color: Colors.black, fontSize: 14),
+                      children: [
+                        const TextSpan(text: "Blocked "),
+                        const TextSpan(
+                          text: "Call",
+                          style: TextStyle(color: Colors.amber),
+                        ),
+                        TextSpan(
+                          text: title.replaceAll("Blocked Call", ""),
+                        ), // Very naive replacement for demo
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          const Divider(height: 1),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: [
-                RichText(
-                  text: TextSpan(
-                    style: const TextStyle(color: Colors.black, fontSize: 14),
-                    children: [
-                      TextSpan(
-                        text: "Reason: ",
-                        style: const TextStyle(color: Color(0xFF1fa4e4)),
-                      ),
-                      TextSpan(text: reason),
-                    ],
+            const Divider(height: 1),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: const TextStyle(color: Colors.black, fontSize: 14),
+                      children: [
+                        const TextSpan(
+                          text: "Reason: ",
+                          style: TextStyle(color: Color(0xFF1fa4e4)),
+                        ),
+                        TextSpan(text: reason),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          const Divider(height: 1),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: [
-                RichText(
-                  text: TextSpan(
-                    style: const TextStyle(color: Colors.black, fontSize: 14),
-                    children: [
-                      const TextSpan(text: "Risk Score: "),
-                      TextSpan(
-                        text: riskScore,
-                        style: const TextStyle(color: Color(0xFF1fa4e4)),
-                      ),
-                    ],
+            const Divider(height: 1),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                children: [
+                  RichText(
+                    text: TextSpan(
+                      style: const TextStyle(color: Colors.black, fontSize: 14),
+                      children: [
+                        const TextSpan(text: "Risk Score: "),
+                        TextSpan(
+                          text: riskScore,
+                          style: const TextStyle(color: Color(0xFF1fa4e4)),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          const Divider(height: 1),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Center(
-              child: Text(
-                actionText,
-                style: const TextStyle(
-                  color: Color(0xFF9747FF),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
+            const Divider(height: 1),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Center(
+                child: Text(
+                  actionText,
+                  style: const TextStyle(
+                    color: Color(0xFF9747FF),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

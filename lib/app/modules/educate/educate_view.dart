@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../widgets/custom_bottom_nav_bar.dart';
+import '../../routes/app_pages.dart';
 import 'educate_controller.dart';
 
 class EducateView extends GetView<EducateController> {
@@ -11,6 +12,7 @@ class EducateView extends GetView<EducateController> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text(
           'Educate',
           style: TextStyle(
@@ -24,18 +26,8 @@ class EducateView extends GetView<EducateController> {
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () => Get.back(),
+          onPressed: () => Get.offNamed(Routes.HOME),
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.signal_cellular_4_bar, color: Colors.black),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.battery_full, color: Colors.black),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

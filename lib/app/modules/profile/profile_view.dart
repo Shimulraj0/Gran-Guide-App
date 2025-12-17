@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../widgets/custom_bottom_nav_bar.dart';
+import '../../routes/app_pages.dart';
 import 'profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
@@ -19,7 +20,7 @@ class ProfileView extends GetView<ProfileController> {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () => Get.back(),
+          onPressed: () => Get.offNamed(Routes.HOME),
         ),
       ),
       body: const Center(

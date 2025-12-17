@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'views/ongoing_call_view.dart';
 
@@ -42,14 +43,98 @@ class CallController extends GetxController {
   }
 
   void onRemindMe() {
-    Get.snackbar("Reminder", "Reminder set for 1 hour.");
-    Get.back();
+    Get.bottomSheet(
+      Container(
+        padding: const EdgeInsets.all(20),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              "Remind Me",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 20),
+            _buildActionItem("In 1 hour", () {
+              Get.back(); // Close bottom sheet
+              Get.snackbar("Reminder", "Reminder set for 1 hour.");
+              Get.back(); // Close call screen
+            }),
+            _buildActionItem("When I leave", () {
+              Get.back();
+              Get.snackbar("Reminder", "Reminder set for when you leave.");
+              Get.back();
+            }),
+            _buildActionItem("End of day", () {
+              Get.back();
+              Get.snackbar("Reminder", "Reminder set for end of day.");
+              Get.back();
+            }),
+          ],
+        ),
+      ),
+    );
   }
 
   void onMessage() {
-    // Should ideally go to message input
-    Get.snackbar("Message", "Quick message sent.");
-    Get.back();
+    Get.bottomSheet(
+      Container(
+        padding: const EdgeInsets.all(20),
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              "Quick Reply",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 20),
+            _buildActionItem(
+              "Can't talk right now.",
+              () => _sendMessage("Can't talk right now."),
+            ),
+            _buildActionItem(
+              "I'll call you back.",
+              () => _sendMessage("I'll call you back."),
+            ),
+            _buildActionItem("On my way.", () => _sendMessage("On my way.")),
+            _buildActionItem("Custom message...", () {
+              Get.back();
+              // Navigate to a message input or similar
+              Get.snackbar(
+                "Message",
+                "Custom message screen (To be implemented)",
+              );
+            }),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _sendMessage(String message) {
+    Get.back(); // Close bottom sheet
+    Get.snackbar("Message Sent", "Reply: \"$message\"");
+    Get.back(); // Close call screen
+  }
+
+  Widget _buildActionItem(String text, VoidCallback onTap) {
+    return ListTile(
+      title: Text(text, textAlign: TextAlign.center),
+      onTap: onTap,
+    );
   }
 
   void toggleMute() {

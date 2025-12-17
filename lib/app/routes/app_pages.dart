@@ -31,6 +31,7 @@ import '../modules/chat/views/chat_list_view.dart';
 import '../modules/chat/views/chat_detail_view.dart';
 import '../modules/call/call_binding.dart';
 import '../modules/call/views/incoming_call_view.dart';
+import '../modules/protection/views/protection_details_view.dart';
 
 part 'app_routes.dart';
 
@@ -128,6 +129,11 @@ class AppPages {
       binding: CallBinding(),
       transition: Transition.fadeIn,
       transitionDuration: const Duration(milliseconds: 500),
+    ),
+    GetPage(
+      name: _Paths.PROTECTION_DETAILS,
+      page: () => const ProtectionDetailsView(),
+      binding: ProtectionBinding(),
     ),
   ];
 

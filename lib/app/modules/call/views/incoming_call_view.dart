@@ -13,23 +13,37 @@ class IncomingCallView extends GetView<CallController> {
       body: Stack(
         fit: StackFit.expand,
         children: [
-          // Background Image (Blurred or Darkened)
+          // Background Gradient
           Container(
-            color: const Color(0xFF4F4F4F), // Greyish dark background
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  const Color(0xFF060D0A).withOpacity(0.6),
+                  const Color(0xFF000D07).withOpacity(0.6),
+                ],
+                stops: const [0.0, 0.8004], // -6.9% clamped to 0.0
+              ),
+            ),
           ),
 
           SafeArea(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Spacer(flex: 2),
+                const Spacer(flex: 3),
 
                 // Caller Info
                 CircleAvatar(
-                  radius: 60,
+                  radius: 65,
                   backgroundColor: Colors.grey[300],
-                  backgroundImage: const AssetImage('assets/images/caller.png'),
-                  onBackgroundImageError: (_, __) {},
+                  backgroundImage: const AssetImage(
+                    'assets/images/Rectangle.png',
+                  ),
+                  onBackgroundImageError: (_, __) {
+                    debugPrint("Failed to load caller image");
+                  },
                   child: const Icon(Icons.person, size: 60, color: Colors.grey),
                 ),
                 const SizedBox(height: 24),
@@ -50,7 +64,7 @@ class IncomingCallView extends GetView<CallController> {
                   ),
                 ),
 
-                const Spacer(flex: 3),
+                const Spacer(flex: 5),
 
                 // Actions (Remind me, Message)
                 Padding(
@@ -59,12 +73,12 @@ class IncomingCallView extends GetView<CallController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       _buildSmallAction(
-                        Icons.alarm,
+                        Icons.access_alarm,
                         "Remind me",
                         controller.onRemindMe,
                       ),
                       _buildSmallAction(
-                        Icons.message,
+                        Icons.chat_bubble,
                         "Message",
                         controller.onMessage,
                       ),
@@ -208,7 +222,7 @@ class _SlideButtonState extends State<_SlideButton> {
                 color: Colors.white,
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.call, color: Colors.green, size: 30),
+              child: const Icon(Icons.call, color: Color(0xFF007AFF), size: 30),
             ),
           ),
         ),
