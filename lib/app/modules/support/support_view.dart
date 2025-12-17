@@ -39,7 +39,7 @@ class SupportView extends GetView<SupportController> {
               child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(
-                  vertical: 20,
+                  vertical: 10,
                   horizontal: 16,
                 ),
                 decoration: BoxDecoration(
@@ -59,7 +59,7 @@ class SupportView extends GetView<SupportController> {
                     const Icon(
                       Icons.help_outlined,
                       color: Color(0xFF2F80ED),
-                      size: 32,
+                      size: 28,
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -138,8 +138,8 @@ class SupportView extends GetView<SupportController> {
                         Text(
                           "Quickly reach out to your trusted contact in case of confusion or danger.",
                           style: GoogleFonts.outfit(
-                            color: const Color(0xFF828282),
-                            fontSize: 14,
+                            color: const Color.fromARGB(255, 31, 30, 30),
+                            fontSize: 18,
                           ),
                         ),
                         const SizedBox(height: 8),
