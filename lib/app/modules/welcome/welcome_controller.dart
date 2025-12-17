@@ -1,0 +1,8 @@
+import 'package:get/get.dart';
+import '../../routes/app_pages.dart';
+
+class WelcomeController extends GetxController {
+  void onNext() {
+    Get.toNamed(Routes.ROLE);
+  }
+}
