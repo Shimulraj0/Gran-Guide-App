@@ -48,7 +48,7 @@ class ProtectionView extends GetView<ProtectionController> {
                   () => Switch(
                     value: controller.isProtectionEnabled.value,
                     onChanged: controller.toggleProtection,
-                    activeColor: Colors.white,
+                    activeThumbColor: Colors.white,
                     activeTrackColor: const Color(0xFF1fa4e4),
                   ),
                 ),

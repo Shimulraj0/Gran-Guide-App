@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../routes/app_pages.dart';
 import '../../colors/app_colors.dart';
 import '../../widgets/custom_bottom_nav_bar.dart';
 import 'home_controller.dart';
