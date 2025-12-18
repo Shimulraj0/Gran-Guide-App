@@ -171,7 +171,9 @@ class ChatDetailView extends GetView<ChatController> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: const Color(0xFFE0E0E0)),
+                      border: Border.all(
+                        color: const Color(0xFF03A9F4).withValues(alpha: 0.5),
+                      ),
                     ),
                     child: Row(
                       children: [
@@ -200,7 +202,7 @@ class ChatDetailView extends GetView<ChatController> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: const Color(0xFF2196F3).withOpacity(0.3),
+                      color: const Color(0xFF2196F3).withValues(alpha: 0.3),
                     ),
                   ),
                   child: const Icon(
