@@ -7,6 +7,7 @@ abstract class Routes {
   static const WELCOME = _Paths.WELCOME;
   static const ROLE = _Paths.ROLE;
   static const AUTH = _Paths.AUTH;
+  static const AUTH_SELECTION = _Paths.AUTH_SELECTION;
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
   static const BIOMETRIC = _Paths.BIOMETRIC;
   static const VERIFY_CODE = _Paths.VERIFY_CODE;
@@ -29,6 +30,7 @@ abstract class _Paths {
   static const WELCOME = '/welcome';
   static const ROLE = '/role';
   static const AUTH = '/auth';
+  static const AUTH_SELECTION = '/auth/selection';
   static const FORGOT_PASSWORD = '/auth/forgot-password';
   static const BIOMETRIC = '/auth/biometric';
   static const VERIFY_CODE = '/auth/verify_code';

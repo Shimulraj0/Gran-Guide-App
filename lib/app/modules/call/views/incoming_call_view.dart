@@ -36,15 +36,13 @@ class IncomingCallView extends GetView<CallController> {
 
                 // Caller Info
                 CircleAvatar(
-                  radius: 65,
-                  backgroundColor: Colors.grey[300],
+                  radius: 80,
                   backgroundImage: const AssetImage(
-                    'assets/images/Rectangle.png',
+                    'assets/images/Ellipse 311.png',
                   ),
                   onBackgroundImageError: (_, __) {
                     debugPrint("Failed to load caller image");
                   },
-                  child: const Icon(Icons.person, size: 60, color: Colors.grey),
                 ),
                 const SizedBox(height: 24),
                 Text(

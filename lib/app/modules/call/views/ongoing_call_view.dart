@@ -29,11 +29,6 @@ class OngoingCallView extends GetView<CallController> {
                           'assets/images/caller.png',
                         ),
                         onBackgroundImageError: (_, __) {},
-                        child: const Icon(
-                          Icons.person,
-                          size: 50,
-                          color: Colors.grey,
-                        ),
                       ),
                       const SizedBox(height: 20),
                       Text(

@@ -7,7 +7,7 @@ class RoleController extends GetxController {
 
   void selectRole(String role) {
     selectedRole.value = role;
-    // Navigate to Auth screen after selection (or immediately)
-    Get.toNamed(Routes.AUTH);
+    // Navigate to Auth selection screen after role selection
+    Get.toNamed(Routes.AUTH_SELECTION);
   }
 }

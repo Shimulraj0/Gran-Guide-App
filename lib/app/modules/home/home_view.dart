@@ -10,46 +10,46 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[50], // Light background
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // 1. Header (Full width, handles top padding internally)
-            _buildHeader(),
+      body: Column(
+        children: [
+          _buildHeader(),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // 2. Protection Card
+                    _buildProtectionCard(),
+                    const SizedBox(height: 24),
 
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // 2. Protection Card
-                  _buildProtectionCard(),
-                  const SizedBox(height: 24),
+                    // 3. Scam Type Dropdown (Mock)
+                    _buildScamTypeSection(),
+                    const SizedBox(height: 16),
 
-                  // 3. Scam Type Dropdown (Mock)
-                  _buildScamTypeSection(),
-                  const SizedBox(height: 16),
+                    // 4. Daily Scam Tip
+                    _buildDailyTipCard(),
+                    const SizedBox(height: 24),
 
-                  // 4. Daily Scam Tip
-                  _buildDailyTipCard(),
-                  const SizedBox(height: 24),
-
-                  // 5. Activity Feed
-                  const Text(
-                    "Activity Feed",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.primary,
+                    // 5. Activity Feed
+                    const Text(
+                      "Activity Feed",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.primary,
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(height: 16),
-                  _buildActivityFeed(),
-                ],
+                    const SizedBox(height: 16),
+                    _buildActivityFeed(),
+                  ],
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       bottomNavigationBar: const CustomBottomNavBar(currentIndex: 0),
     );
@@ -69,7 +69,7 @@ class HomeView extends GetView<HomeController> {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withValues(alpha: 0.9),
+            color: Colors.grey.withValues(alpha: 0.5),
             blurRadius: 10,
             offset: const Offset(0, 5),
           ),

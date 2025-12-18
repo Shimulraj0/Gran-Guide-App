@@ -14,7 +14,7 @@ class AuthView extends GetView<AuthController> {
       appBar: AppBar(
         leading: ElevatedButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Get.back();
           },
           style: ElevatedButton.styleFrom(
             elevation: 0,

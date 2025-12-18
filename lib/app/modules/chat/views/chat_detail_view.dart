@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import '../chat_controller.dart';
+import '../../../routes/app_pages.dart';
+import 'dart:io';
 
 class ChatDetailView extends GetView<ChatController> {
   const ChatDetailView({super.key});
@@ -43,7 +46,7 @@ class ChatDetailView extends GetView<ChatController> {
                 const SizedBox(height: 5),
                 CircleAvatar(
                   radius: 45,
-                  backgroundImage: AssetImage(chatData['image'] ?? ""),
+                  backgroundImage: AssetImage('assets/images/Rectangle.png'),
                   backgroundColor: Colors.white24,
                   child: (chatData['image'] == null)
                       ? const Icon(Icons.person, size: 50, color: Colors.white)
@@ -51,7 +54,7 @@ class ChatDetailView extends GetView<ChatController> {
                 ),
                 const SizedBox(height: 15),
                 Text(
-                  chatData['name'] ?? "Jhon Abraham",
+                  chatData["name"],
                   style: GoogleFonts.outfit(
                     color: Colors.white,
                     fontSize: 24,
@@ -78,7 +81,7 @@ class ChatDetailView extends GetView<ChatController> {
                     _buildHeaderAction(
                       Icons.call,
                       isPrimary: false,
-                      onTap: () => Get.toNamed('/incoming_call'),
+                      onTap: () => Get.toNamed(Routes.INCOMING_CALL),
                     ),
                     const SizedBox(width: 20),
                     _buildHeaderAction(
@@ -114,42 +117,28 @@ class ChatDetailView extends GetView<ChatController> {
                     ),
                   ),
                   Expanded(
-                    child: ListView(
-                      padding: const EdgeInsets.all(20),
-                      children: [
-                        _buildMessageRow(
-                          isMe: false,
-                          name: chatData['name'] ?? "Jhon Abraham",
-                          message: "Hello ! Nazrul How are you?",
-                          time: "09:25 AM",
-                          avatar: chatData['image'],
-                        ),
-                        const SizedBox(height: 15),
-                        _buildMessageRow(
-                          isMe: true,
-                          name: "Me",
-                          message: "You did your job well!",
-                          time: "09:25 AM",
-                          avatar: null,
-                        ),
-                        const SizedBox(height: 15),
-                        _buildMessageRow(
-                          isMe: false,
-                          name: chatData['name'] ?? "Jhon Abraham",
-                          message: "Have a great working week!!",
-                          time: "09:25 AM",
-                          avatar: chatData['image'],
-                        ),
-                        const SizedBox(height: 10),
-                        _buildMessageRow(
-                          isMe: false,
-                          name: chatData['name'] ?? "Jhon Abraham",
-                          message: "Hope you like it",
-                          time: "09:25 AM",
-                          avatar: chatData['image'],
-                          hideHeader: true,
-                        ),
-                      ],
+                    child: Obx(
+                      () => ListView.builder(
+                        padding: const EdgeInsets.all(20),
+                        itemCount: controller.messages.length,
+                        itemBuilder: (context, index) {
+                          final msg = controller.messages[index];
+                          return _buildMessageRow(
+                            isMe: msg['isMe'] ?? false,
+                            name: msg['isMe']
+                                ? "Me"
+                                : (chatData['name'] ?? "User"),
+                            message: msg['message'] ?? "",
+                            time: msg['time'] ?? "",
+                            avatar: msg['isMe'] ? null : chatData['image'],
+                            imagePath: msg['imagePath'],
+                            hideHeader:
+                                index > 0 &&
+                                controller.messages[index - 1]['isMe'] ==
+                                    msg['isMe'],
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ],
@@ -171,13 +160,15 @@ class ChatDetailView extends GetView<ChatController> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: const Color(0xFF03A9F4).withValues(alpha: 0.5),
+                        color: const Color(0xFF03A9F4).withOpacity(0.5),
                       ),
                     ),
                     child: Row(
                       children: [
                         Expanded(
                           child: TextField(
+                            controller: controller.messageController,
+                            onSubmitted: (_) => controller.sendMessage(),
                             decoration: InputDecoration(
                               hintText: "Type something...",
                               hintStyle: GoogleFonts.outfit(
@@ -188,7 +179,66 @@ class ChatDetailView extends GetView<ChatController> {
                             ),
                           ),
                         ),
-                        Icon(Icons.image_outlined, color: Colors.grey[400]),
+                        InkWell(
+                          onTap: () {
+                            Get.bottomSheet(
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 20,
+                                  horizontal: 20,
+                                ),
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                  ),
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    ListTile(
+                                      leading: const Icon(
+                                        Icons.camera_alt_outlined,
+                                        color: Color(0xFF2196F3),
+                                      ),
+                                      title: Text(
+                                        'Take Photo',
+                                        style: GoogleFonts.outfit(),
+                                      ),
+                                      onTap: () {
+                                        Get.back();
+                                        controller.pickImage(
+                                          ImageSource.camera,
+                                        );
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: const Icon(
+                                        Icons.image_outlined,
+                                        color: Color(0xFF2196F3),
+                                      ),
+                                      title: Text(
+                                        'Choose from Gallery',
+                                        style: GoogleFonts.outfit(),
+                                      ),
+                                      onTap: () {
+                                        Get.back();
+                                        controller.pickImage(
+                                          ImageSource.gallery,
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                          child: Icon(
+                            Icons.image_outlined,
+                            color: Colors.grey[400],
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -201,12 +251,16 @@ class ChatDetailView extends GetView<ChatController> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: const Color(0xFF2196F3).withValues(alpha: 0.3),
+                      color: const Color(0xFF2196F3).withOpacity(0.3),
                     ),
                   ),
-                  child: const Icon(
-                    Icons.send_outlined,
-                    color: Color(0xFF2196F3),
+                  child: InkWell(
+                    onTap: controller.sendMessage,
+                    borderRadius: BorderRadius.circular(12),
+                    child: const Icon(
+                      Icons.send_outlined,
+                      color: Color(0xFF2196F3),
+                    ),
                   ),
                 ),
               ],
@@ -231,7 +285,7 @@ class ChatDetailView extends GetView<ChatController> {
         decoration: BoxDecoration(
           color: isPrimary
               ? Colors.white
-              : const Color(0xFF0D47A1).withValues(alpha: 0.3),
+              : const Color.fromARGB(255, 255, 255, 255).withOpacity(0.3),
           shape: BoxShape.circle,
         ),
         child: Icon(
@@ -249,6 +303,7 @@ class ChatDetailView extends GetView<ChatController> {
     required String message,
     required String time,
     String? avatar,
+    String? imagePath,
     bool hideHeader = false,
   }) {
     return Padding(
@@ -257,73 +312,81 @@ class ChatDetailView extends GetView<ChatController> {
         mainAxisAlignment: isMe
             ? MainAxisAlignment.end
             : MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (!isMe && !hideHeader) ...[
+          if (!isMe && !hideHeader)
             CircleAvatar(
               radius: 18,
-              backgroundImage: avatar != null ? AssetImage(avatar) : null,
-              child: avatar == null ? const Icon(Icons.person, size: 20) : null,
+              backgroundImage: AssetImage(avatar ?? 'assets/images/user1.png'),
             ),
-            const SizedBox(width: 10),
-          ] else if (!isMe && hideHeader) ...[
-            const SizedBox(width: 46), // Avatar width + spacing
-          ],
-          Column(
-            crossAxisAlignment: isMe
-                ? CrossAxisAlignment.end
-                : CrossAxisAlignment.start,
-            children: [
-              if (!isMe && !hideHeader) ...[
+          if (!isMe && hideHeader) const SizedBox(width: 36),
+          const SizedBox(width: 8),
+          Flexible(
+            child: Column(
+              crossAxisAlignment: isMe
+                  ? CrossAxisAlignment.end
+                  : CrossAxisAlignment.start,
+              children: [
+                if (!hideHeader)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 4),
+                    child: Text(
+                      name,
+                      style: GoogleFonts.outfit(
+                        fontSize: 12,
+                        color: Colors.grey[600],
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                if (imagePath != null)
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 4),
+                    constraints: const BoxConstraints(maxWidth: 250),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    child: Image.file(File(imagePath), fit: BoxFit.cover),
+                  ),
+                if (message.isNotEmpty)
+                  Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: isMe ? const Color(0xFF2196F3) : Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: const Radius.circular(12),
+                        topRight: const Radius.circular(12),
+                        bottomLeft: Radius.circular(isMe ? 12 : 0),
+                        bottomRight: Radius.circular(isMe ? 0 : 12),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 5,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Text(
+                      message,
+                      style: GoogleFonts.outfit(
+                        color: isMe ? Colors.white : Colors.black87,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                const SizedBox(height: 2),
                 Text(
-                  name,
+                  time,
                   style: GoogleFonts.outfit(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
+                    fontSize: 10,
+                    color: Colors.grey[400],
                   ),
                 ),
-                const SizedBox(height: 4),
               ],
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
-                constraints: const BoxConstraints(maxWidth: 240),
-                decoration: BoxDecoration(
-                  color: isMe
-                      ? const Color(0xFF2196F3)
-                      : const Color(0xFFE3F2FD),
-                  borderRadius: BorderRadius.only(
-                    topLeft: const Radius.circular(12),
-                    topRight: const Radius.circular(12),
-                    bottomLeft: isMe
-                        ? const Radius.circular(12)
-                        : const Radius.circular(4),
-                    bottomRight: isMe
-                        ? const Radius.circular(4)
-                        : const Radius.circular(12),
-                  ),
-                ),
-                child: Text(
-                  message,
-                  style: GoogleFonts.outfit(
-                    color: isMe ? Colors.white : Colors.black87,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                time,
-                style: GoogleFonts.outfit(
-                  color: Colors.grey[500],
-                  fontSize: 10,
-                ),
-              ),
-            ],
+            ),
           ),
+          if (isMe) const SizedBox(width: 8),
         ],
       ),
     );

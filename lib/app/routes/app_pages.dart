@@ -14,6 +14,7 @@ import '../modules/splash/splash_view.dart';
 import '../modules/welcome/welcome_view.dart';
 import '../modules/role/role_view.dart';
 import '../modules/auth/auth_view.dart';
+import '../modules/auth/views/auth_selection_view.dart';
 import '../modules/auth/views/forgot_password_view.dart';
 import '../modules/auth/views/biometric_view.dart';
 import '../modules/home/home_view.dart';
@@ -64,6 +65,11 @@ class AppPages {
     GetPage(
       name: _Paths.AUTH,
       page: () => const AuthView(),
+      binding: AuthBinding(),
+    ),
+    GetPage(
+      name: _Paths.AUTH_SELECTION,
+      page: () => const AuthSelectionView(),
       binding: AuthBinding(),
     ),
     GetPage(
