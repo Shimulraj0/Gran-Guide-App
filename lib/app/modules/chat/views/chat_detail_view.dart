@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../chat_controller.dart';
-import '../../../widgets/custom_bottom_nav_bar.dart';
 
 class ChatDetailView extends GetView<ChatController> {
   const ChatDetailView({super.key});
@@ -232,7 +231,7 @@ class ChatDetailView extends GetView<ChatController> {
         decoration: BoxDecoration(
           color: isPrimary
               ? Colors.white
-              : const Color(0xFF0D47A1).withOpacity(0.3),
+              : const Color(0xFF0D47A1).withValues(alpha: 0.3),
           shape: BoxShape.circle,
         ),
         child: Icon(
