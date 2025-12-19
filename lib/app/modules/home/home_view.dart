@@ -9,10 +9,12 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50], // Light background
+      backgroundColor: Theme.of(
+        context,
+      ).scaffoldBackgroundColor, // Light background
       body: Column(
         children: [
-          _buildHeader(),
+          _buildHeader(context),
           Expanded(
             child: SingleChildScrollView(
               child: Padding(
@@ -29,7 +31,7 @@ class HomeView extends GetView<HomeController> {
                     const SizedBox(height: 16),
 
                     // 4. Daily Scam Tip
-                    _buildDailyTipCard(),
+                    _buildDailyTipCard(context),
                     const SizedBox(height: 24),
 
                     // 5. Activity Feed
@@ -55,14 +57,14 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget _buildHeader() {
+  Widget _buildHeader(BuildContext context) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.only(left: 20, right: 20, top: 40, bottom: 25),
       decoration: BoxDecoration(
-        color: const Color(
-          0xFFEBF8FE,
-        ), // Light blue similar to activity feed or lighter
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Theme.of(context).colorScheme.surface
+            : const Color(0xFFEBF8FE),
         borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(30),
           bottomRight: Radius.circular(30),
@@ -98,7 +100,7 @@ class HomeView extends GetView<HomeController> {
                   const SizedBox(width: 12),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         "Hello,",
                         style: TextStyle(
@@ -112,8 +114,7 @@ class HomeView extends GetView<HomeController> {
                         style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
-                          color: AppColors
-                              .textPrimary, // Changed color to match image dark text
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ],
@@ -284,7 +285,7 @@ class HomeView extends GetView<HomeController> {
     );
   }
 
-  Widget _buildDailyTipCard() {
+  Widget _buildDailyTipCard(BuildContext context) {
     return Column(
       children: [
         // Header Row outside the card
@@ -316,7 +317,9 @@ class HomeView extends GetView<HomeController> {
           width: double.infinity,
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
-            color: const Color(0xFFEBEBEB), // Light grey background
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Theme.of(context).colorScheme.surfaceContainerHighest
+                : const Color(0xFFEBEBEB),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
@@ -348,7 +351,7 @@ class HomeView extends GetView<HomeController> {
               Text(
                 "If an email says your account is locked, it might be fake Don't click links.\nAsk your admin.",
                 style: TextStyle(
-                  color: Colors.black87,
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontWeight: FontWeight.w600,
                   fontSize: 15,
                   height: 1.5,
@@ -418,7 +421,9 @@ class HomeView extends GetView<HomeController> {
               decoration: BoxDecoration(
                 color: isSelected
                     ? const Color(0xFFB8DEF3)
-                    : const Color(0xFFEBF8FE), // Very light blue
+                    : (Theme.of(context).brightness == Brightness.dark
+                          ? Theme.of(context).colorScheme.surfaceContainerHigh
+                          : const Color(0xFFEBF8FE)), // Very light blue
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Row(

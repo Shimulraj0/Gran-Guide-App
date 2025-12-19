@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../auth_controller.dart';
 import '../../../routes/app_pages.dart';
+import '../../../controllers/theme_controller.dart';
 
 class AuthSelectionView extends GetView<AuthController> {
   const AuthSelectionView({super.key});
@@ -9,9 +10,9 @@ class AuthSelectionView extends GetView<AuthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(
-        0xFFFFF3F5,
-      ), // Light pinkish background from image
+      backgroundColor: Theme.of(
+        context,
+      ).scaffoldBackgroundColor, // Adaptive background
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -35,20 +36,20 @@ class AuthSelectionView extends GetView<AuthController> {
               ),
               const SizedBox(height: 20),
               // Title
-              const Text(
+              Text(
                 'Create your own\ngran guide plan',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF2D2D2D),
+                  color: Theme.of(context).colorScheme.onSurface,
                   height: 1.2,
                 ),
               ),
               const Spacer(flex: 2),
               // Illustration
               Image.asset(
-                'assets/images/protection_illustration.png', // Assuming this asset exists or will be provided
+                'assets/images/image8.png', // Assuming this asset exists or will be provided
                 height: 250,
                 fit: BoxFit.contain,
                 errorBuilder: (context, error, stackTrace) {
@@ -59,20 +60,20 @@ class AuthSelectionView extends GetView<AuthController> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: const Center(
-                      child: Text('Illustration Placeholder'),
+                    child: Center(
+                      child: Image.asset('assets/images/image8.png'),
                     ),
                   );
                 },
               ),
               const Spacer(flex: 2),
               // Subtitle
-              const Text(
+              Text(
                 'Stay Secure. Feel Supported.\nAlways Guided."',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
-                  color: Color(0xFF2D2D2D),
+                  color: Theme.of(context).colorScheme.onSurface,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -160,34 +161,43 @@ class AuthSelectionView extends GetView<AuthController> {
   }
 
   Widget _buildThemeToggle() {
-    return Container(
-      width: 60,
-      height: 30,
-      decoration: BoxDecoration(
-        color: const Color(0xFFB3E5FC),
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: Stack(
-        children: [
-          Positioned(
-            right: 4,
-            top: 4,
-            bottom: 4,
-            child: Container(
-              width: 22,
-              decoration: const BoxDecoration(
-                color: Color(0xFF03A9F4),
-                shape: BoxShape.circle,
-              ),
-              child: const Icon(
-                Icons.nightlight_round,
-                size: 14,
-                color: Colors.white,
-              ),
-            ),
+    final themeController = Get.find<ThemeController>();
+    return GestureDetector(
+      onTap: themeController.toggleTheme,
+      child: Obx(() {
+        final isDark = themeController.isDarkMode.value;
+        return Container(
+          width: 60,
+          height: 30,
+          decoration: BoxDecoration(
+            color: isDark ? Colors.grey[800] : const Color(0xFFB3E5FC),
+            borderRadius: BorderRadius.circular(15),
           ),
-        ],
-      ),
+          child: Stack(
+            children: [
+              AnimatedPositioned(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                left: isDark ? 34 : 4,
+                top: 4,
+                bottom: 4,
+                child: Container(
+                  width: 22,
+                  decoration: BoxDecoration(
+                    color: isDark ? Colors.grey[600] : const Color(0xFF03A9F4),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    isDark ? Icons.nights_stay : Icons.wb_sunny,
+                    size: 14,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      }),
     );
   }
 

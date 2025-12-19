@@ -28,6 +28,35 @@ class AppTheme {
     ),
   );
 
+  static final ThemeData darkTheme = ThemeData(
+    useMaterial3: true,
+    brightness: Brightness.dark,
+    colorScheme: ColorScheme.fromSeed(
+      seedColor: const Color(0xFF2FA2E3),
+      brightness: Brightness.dark,
+      primary: const Color(0xFF2FA2E3),
+      surface: const Color(0xFF121212),
+    ),
+    scaffoldBackgroundColor: const Color(0xFF121212),
+    textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme)
+        .copyWith(
+          headlineMedium: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF6FCEF0), // Lighter blue for dark mode
+          ),
+          bodyLarge: const TextStyle(color: Colors.white70),
+        ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color(0xFF2FA2E3),
+        foregroundColor: Colors.white,
+        padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+        textStyle: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
+    ),
+  );
+
   // Gradient Definition
   static const LinearGradient primaryGradient = LinearGradient(
     begin: Alignment.topCenter,

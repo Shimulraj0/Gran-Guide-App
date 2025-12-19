@@ -71,7 +71,7 @@ class CallController extends GetxController {
       Container(
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color: Color(0xFF2F2F2F),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
@@ -82,7 +82,11 @@ class CallController extends GetxController {
           children: [
             const Text(
               "Remind Me",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
             const SizedBox(height: 20),
             _buildActionItem("In 1 hour", () {
@@ -111,7 +115,7 @@ class CallController extends GetxController {
       Container(
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
-          color: Colors.white,
+          color: Color(0xFF2F2F2F),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
@@ -122,7 +126,11 @@ class CallController extends GetxController {
           children: [
             const Text(
               "Quick Reply",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
             const SizedBox(height: 20),
             _buildActionItem(
@@ -156,7 +164,11 @@ class CallController extends GetxController {
 
   Widget _buildActionItem(String text, VoidCallback onTap) {
     return ListTile(
-      title: Text(text, textAlign: TextAlign.center),
+      title: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: const TextStyle(color: Colors.white70),
+      ),
       onTap: onTap,
     );
   }

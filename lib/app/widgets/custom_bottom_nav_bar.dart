@@ -14,7 +14,9 @@ class CustomBottomNavBar extends StatelessWidget {
     return Container(
       height: 80,
       decoration: BoxDecoration(
-        color: AppColors.primaryLight,
+        color: Theme.of(context).brightness == Brightness.dark
+            ? Theme.of(context).colorScheme.surface
+            : AppColors.primaryLight,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -27,30 +29,35 @@ class CustomBottomNavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _buildNavItem(
+            context,
             index: 0,
             iconPath: 'assets/icons/home.png',
             label: 'Home',
             onTap: () => _handleNavigation(0),
           ),
           _buildNavItem(
+            context,
             index: 1,
             iconPath: 'assets/icons/Vector(2).png',
             label: 'Educate',
             onTap: () => _handleNavigation(1),
           ),
           _buildNavItem(
+            context,
             index: 2,
             iconPath: 'assets/icons/Group.png',
             label: 'Protection',
             onTap: () => _handleNavigation(2),
           ),
           _buildNavItem(
+            context,
             index: 3,
             iconPath: 'assets/icons/customer-support 1.png',
             label: 'Support',
             onTap: () => _handleNavigation(3),
           ),
           _buildNavItem(
+            context,
             index: 4,
             iconPath: 'assets/icons/frame.png',
             label: 'Profile',
@@ -61,14 +68,18 @@ class CustomBottomNavBar extends StatelessWidget {
     );
   }
 
-  Widget _buildNavItem({
+  Widget _buildNavItem(
+    BuildContext context, {
     required int index,
     required String iconPath,
     required String label,
     required VoidCallback onTap,
   }) {
     final isSelected = currentIndex == index;
-    final color = isSelected ? Colors.white : Colors.black;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final color = isSelected
+        ? (isDark ? AppColors.primary : Colors.white)
+        : (isDark ? Colors.white70 : Colors.black);
 
     return GestureDetector(
       onTap: onTap,

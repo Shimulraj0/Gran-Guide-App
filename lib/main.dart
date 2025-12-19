@@ -5,7 +5,10 @@ import 'package:get/get.dart';
 import 'app/routes/app_pages.dart';
 import 'core/theme/app_theme.dart';
 
+import 'app/controllers/theme_controller.dart';
+
 void main() {
+  Get.put(ThemeController()); // Global Theme Controller
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
@@ -26,6 +29,8 @@ class GranGuideApp extends StatelessWidget {
       title: 'Gran Guide',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: ThemeMode.light,
       initialRoute: AppPages.initial,
       getPages: AppPages.routes, // Ensure this returns a List<GetPage<dynamic>>
     );
