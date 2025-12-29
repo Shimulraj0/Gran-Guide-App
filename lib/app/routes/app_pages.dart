@@ -37,7 +37,14 @@ import '../modules/protection/views/protection_details_view.dart';
 import '../modules/profile/edit_profile_view.dart';
 import '../modules/profile/subscription_plans_view.dart';
 import '../modules/profile/payment_option_view.dart';
-import '../modules/profile/settings_view.dart';
+
+import '../modules/settings/settings_binding.dart';
+import '../modules/settings/settings_view.dart';
+import '../modules/settings/views/change_password_view.dart';
+import '../modules/settings/views/terms_view.dart';
+import '../modules/settings/views/privacy_view.dart';
+import '../modules/settings/views/faqs_view.dart';
+import '../modules/settings/views/help_center_view.dart';
 
 part 'app_routes.dart';
 
@@ -168,7 +175,36 @@ class AppPages {
       page: () => const PaymentOptionView(),
       binding: ProfileBinding(),
     ),
-    GetPage(name: _Paths.SETTINGS, page: () => const SettingsView()),
+    GetPage(
+      name: _Paths.SETTINGS,
+      page: () => const SettingsView(),
+      binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHANGE_PASSWORD,
+      page: () => const ChangePasswordView(),
+      binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: _Paths.TERMS_CONDITIONS,
+      page: () => const TermsView(),
+      binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: _Paths.PRIVACY_POLICY,
+      page: () => const PrivacyView(),
+      binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: _Paths.FAQS,
+      page: () => const FaqsView(),
+      binding: SettingsBinding(),
+    ),
+    GetPage(
+      name: _Paths.HELP_CENTER,
+      page: () => const HelpCenterView(),
+      binding: SettingsBinding(),
+    ),
   ];
 
   // Add more routes here

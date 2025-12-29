@@ -26,6 +26,11 @@ abstract class Routes {
   static const SUBSCRIPTION_PLANS = _Paths.SUBSCRIPTION_PLANS;
   static const PAYMENT_OPTION = _Paths.PAYMENT_OPTION;
   static const SETTINGS = _Paths.SETTINGS;
+  static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
+  static const TERMS_CONDITIONS = _Paths.TERMS_CONDITIONS;
+  static const PRIVACY_POLICY = _Paths.PRIVACY_POLICY;
+  static const FAQS = _Paths.FAQS;
+  static const HELP_CENTER = _Paths.HELP_CENTER;
 }
 
 abstract class _Paths {
@@ -53,4 +58,9 @@ abstract class _Paths {
   static const SUBSCRIPTION_PLANS = '/profile/subscription';
   static const PAYMENT_OPTION = '/profile/payment';
   static const SETTINGS = '/settings';
+  static const CHANGE_PASSWORD = '/settings/change_password';
+  static const TERMS_CONDITIONS = '/settings/terms_conditions';
+  static const PRIVACY_POLICY = '/settings/privacy_policy';
+  static const FAQS = '/settings/faqs';
+  static const HELP_CENTER = '/settings/help_center';
 }
