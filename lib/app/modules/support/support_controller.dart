@@ -9,12 +9,12 @@ class SupportController extends GetxController {
   final contactNumber = "+8801XXXXXXXXX";
 
   void onEmergencyCall() {
-    print("Initiating emergency call to $contactNumber");
+    debugPrint("Initiating emergency call to $contactNumber");
     Get.toNamed(Routes.INCOMING_CALL);
   }
 
   void onEmergencyMessage() {
-    print("Initiating emergency message to $contactNumber");
+    debugPrint("Initiating emergency message to $contactNumber");
     Get.toNamed(
       Routes.CONTACT_PROFILE,
       arguments: {
@@ -97,12 +97,12 @@ class SupportController extends GetxController {
   }
 
   void onBrowseHelpTopics() {
-    print("Navigate to all help topics");
+    debugPrint("Navigate to all help topics");
     // Get.toNamed(Routes.HELP_TOPICS);
   }
 
   void onArticleTap(String title) {
-    print("Tapped article: $title");
+    debugPrint("Tapped article: $title");
     if (title.contains("screen sharing")) {
       showScreenShareDialog();
     }

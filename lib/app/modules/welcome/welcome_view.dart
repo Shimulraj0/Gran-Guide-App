@@ -44,38 +44,41 @@ class WelcomeView extends GetView<WelcomeController> {
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.w900),
             ),
             const Spacer(),
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                gradient: AppTheme.primaryGradient,
-                borderRadius: BorderRadius.circular(30),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.blue.withValues(alpha: 0.3),
-                    blurRadius: 10,
-                    offset: const Offset(0, 5),
-                  ),
-                ],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: ElevatedButton(
-                  onPressed: controller.onNext,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                    padding: const EdgeInsets.all(13),
-                    // shape: RoundedRectangleBorder(
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  gradient: AppTheme.primaryGradient,
+                  borderRadius: BorderRadius.circular(30),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.blue.withValues(alpha: 0.3),
+                      blurRadius: 10,
+                      offset: const Offset(0, 5),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  child: ElevatedButton(
+                    onPressed: controller.onNext,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      padding: const EdgeInsets.all(13),
+                      // shape: RoundedRectangleBorder(
 
-                    //   borderRadius: BorderRadius.circular(30),
-                    // ),
-                  ),
-                  child: const Text(
-                    'Next',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                      //   borderRadius: BorderRadius.circular(30),
+                      // ),
+                    ),
+                    child: const Text(
+                      'Next',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),

@@ -214,7 +214,7 @@ class ProtectionView extends GetView<ProtectionController> {
               reason: "Reported by many users",
               riskScore: "94 / 100",
               actionText: "[View Details]",
-              borderColor: Colors.red.withOpacity(0.3), // Subtle border?
+              borderColor: Colors.red.withValues(alpha: 0.3), // Subtle border?
             ),
 
             const SizedBox(height: 24),
@@ -238,7 +238,7 @@ class ProtectionView extends GetView<ProtectionController> {
               reason: "Reported by many users",
               riskScore: "94 / 100",
               actionText: "[Review Email]",
-              borderColor: Colors.amber.withOpacity(0.3),
+              borderColor: Colors.amber.withValues(alpha: 0.3),
             ),
 
             const SizedBox(height: 24),

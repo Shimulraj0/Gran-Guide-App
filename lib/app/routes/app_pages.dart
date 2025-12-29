@@ -34,6 +34,10 @@ import '../modules/call/call_binding.dart';
 import '../modules/call/views/incoming_call_view.dart';
 import '../modules/call/views/ongoing_call_view.dart';
 import '../modules/protection/views/protection_details_view.dart';
+import '../modules/profile/edit_profile_view.dart';
+import '../modules/profile/subscription_plans_view.dart';
+import '../modules/profile/payment_option_view.dart';
+import '../modules/profile/settings_view.dart';
 
 part 'app_routes.dart';
 
@@ -149,6 +153,22 @@ class AppPages {
       page: () => const ProtectionDetailsView(),
       binding: ProtectionBinding(),
     ),
+    GetPage(
+      name: _Paths.EDIT_PROFILE,
+      page: () => const EditProfileView(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.SUBSCRIPTION_PLANS,
+      page: () => const SubscriptionPlansView(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.PAYMENT_OPTION,
+      page: () => const PaymentOptionView(),
+      binding: ProfileBinding(),
+    ),
+    GetPage(name: _Paths.SETTINGS, page: () => const SettingsView()),
   ];
 
   // Add more routes here

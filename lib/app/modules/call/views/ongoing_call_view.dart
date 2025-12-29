@@ -28,7 +28,7 @@ class OngoingCallView extends GetView<CallController> {
                         backgroundImage: const AssetImage(
                           'assets/images/caller.png',
                         ),
-                        onBackgroundImageError: (_, __) {},
+                        onBackgroundImageError: (_, stackTrace) {},
                       ),
                       const SizedBox(height: 20),
                       Text(
@@ -148,7 +148,7 @@ class OngoingCallView extends GetView<CallController> {
                       child: Container(
                         margin: const EdgeInsets.all(20),
                         decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.9),
+                          color: Colors.black.withValues(alpha: 0.9),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Column(
@@ -164,7 +164,7 @@ class OngoingCallView extends GetView<CallController> {
                                   vertical: 12,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.white.withOpacity(0.05),
+                                  color: Colors.white.withValues(alpha: 0.05),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Row(
@@ -231,7 +231,7 @@ class OngoingCallView extends GetView<CallController> {
               decoration: BoxDecoration(
                 color: isActive.value
                     ? Colors.white
-                    : Colors.white.withOpacity(0.1),
+                    : Colors.white.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: Icon(

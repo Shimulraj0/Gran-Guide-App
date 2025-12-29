@@ -20,8 +20,8 @@ class IncomingCallView extends GetView<CallController> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  const Color(0xFF060D0A).withOpacity(0.6),
-                  const Color(0xFF000D07).withOpacity(0.6),
+                  const Color(0xFF060D0A).withValues(alpha: 0.6),
+                  const Color(0xFF000D07).withValues(alpha: 0.6),
                 ],
                 stops: const [0.0, 0.8004], // -6.9% clamped to 0.0
               ),
@@ -40,7 +40,7 @@ class IncomingCallView extends GetView<CallController> {
                   backgroundImage: const AssetImage(
                     'assets/images/Ellipse 311.png',
                   ),
-                  onBackgroundImageError: (_, __) {
+                  onBackgroundImageError: (_, stackTrace) {
                     debugPrint("Failed to load caller image");
                   },
                 ),
@@ -100,7 +100,7 @@ class IncomingCallView extends GetView<CallController> {
                         Container(
                           height: 70,
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
+                            color: Colors.white.withValues(alpha: 0.2),
                             borderRadius: BorderRadius.circular(35),
                           ),
                           alignment: Alignment.center,

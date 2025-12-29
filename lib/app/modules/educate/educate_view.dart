@@ -213,7 +213,7 @@ class EducateView extends GetView<EducateController> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     border: Border.all(
-                      color: Colors.red.withOpacity(0.5),
+                      color: Colors.red.withValues(alpha: 0.5),
                       width: 1,
                     ),
                   ),

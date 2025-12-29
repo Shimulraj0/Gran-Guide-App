@@ -62,7 +62,7 @@ class ChatListView extends GetView<ChatController> {
                           backgroundImage: AssetImage(chat['image']),
                           backgroundColor: Colors.grey[200],
                           // Fallback if image not found
-                          onBackgroundImageError: (_, __) {},
+                          onBackgroundImageError: (_, stackTrace) {},
                           child: chat['image'] == null || chat['image'].isEmpty
                               ? const Icon(Icons.person, color: Colors.grey)
                               : null,

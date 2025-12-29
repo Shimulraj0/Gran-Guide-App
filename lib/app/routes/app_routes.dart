@@ -22,6 +22,10 @@ abstract class Routes {
   static const INCOMING_CALL = _Paths.INCOMING_CALL;
   static const ONGOING_CALL = _Paths.ONGOING_CALL;
   static const PROTECTION_DETAILS = _Paths.PROTECTION_DETAILS;
+  static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
+  static const SUBSCRIPTION_PLANS = _Paths.SUBSCRIPTION_PLANS;
+  static const PAYMENT_OPTION = _Paths.PAYMENT_OPTION;
+  static const SETTINGS = _Paths.SETTINGS;
 }
 
 abstract class _Paths {
@@ -45,4 +49,8 @@ abstract class _Paths {
   static const INCOMING_CALL = '/call/incoming';
   static const ONGOING_CALL = '/call/ongoing';
   static const PROTECTION_DETAILS = '/protection/details';
+  static const EDIT_PROFILE = '/profile/edit';
+  static const SUBSCRIPTION_PLANS = '/profile/subscription';
+  static const PAYMENT_OPTION = '/profile/payment';
+  static const SETTINGS = '/settings';
 }

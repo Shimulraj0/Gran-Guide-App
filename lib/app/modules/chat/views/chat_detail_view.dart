@@ -160,7 +160,7 @@ class ChatDetailView extends GetView<ChatController> {
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: const Color(0xFF03A9F4).withOpacity(0.5),
+                        color: const Color(0xFF03A9F4).withValues(alpha: 0.5),
                       ),
                     ),
                     child: Row(
@@ -251,7 +251,7 @@ class ChatDetailView extends GetView<ChatController> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: const Color(0xFF2196F3).withOpacity(0.3),
+                      color: const Color(0xFF2196F3).withValues(alpha: 0.3),
                     ),
                   ),
                   child: InkWell(
@@ -285,7 +285,7 @@ class ChatDetailView extends GetView<ChatController> {
         decoration: BoxDecoration(
           color: isPrimary
               ? Colors.white
-              : const Color.fromARGB(255, 255, 255, 255).withOpacity(0.3),
+              : const Color.fromARGB(255, 255, 255, 255).withValues(alpha: 0.3),
           shape: BoxShape.circle,
         ),
         child: Icon(
@@ -361,7 +361,7 @@ class ChatDetailView extends GetView<ChatController> {
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.05),
+                          color: Colors.black.withValues(alpha: 0.05),
                           blurRadius: 5,
                           offset: const Offset(0, 2),
                         ),
