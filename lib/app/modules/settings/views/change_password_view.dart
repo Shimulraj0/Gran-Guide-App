@@ -22,7 +22,7 @@ class ChangePasswordView extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black, size: 20),
+          icon: Icon(Icons.arrow_back_ios, color: Colors.black, size: 20),
           onPressed: () => Get.back(),
         ),
       ),
@@ -33,7 +33,7 @@ class ChangePasswordView extends StatelessWidget {
           children: [
             Text(
               'Set your new password',
-              style: GoogleFonts.outfit(fontSize: 14, color: Colors.grey),
+              style: GoogleFonts.outfit(fontSize: 14, color: Colors.black),
             ),
             const SizedBox(height: 24),
             _buildPasswordField(
@@ -117,7 +117,7 @@ class ChangePasswordView extends StatelessWidget {
             obscureText: true,
             decoration: InputDecoration(
               hintText: hintText,
-              hintStyle: GoogleFonts.outfit(color: Colors.grey),
+              hintStyle: GoogleFonts.outfit(color: Colors.black),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16,
